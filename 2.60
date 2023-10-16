@@ -1,0 +1,26 @@
+#include<stdio.h>
+
+unsigned replace_byte(unsigned x, int i, unsigned char a)
+{
+	if (i < 0 || i >= sizeof(unsigned))//排除非法操作 
+	{
+		return x;
+	}
+	unsigned delete = 0xFF;//用于清空x的目标字节
+	unsigned leftmove = (unsigned)a << (i * 8);//将a的二进制数左移i个字节
+	x = x & ~(delete << (i * 8));//清空x的i位字节
+	x = x | leftmove;//将清除位置替换为目标字节a
+	return x;
+}
+
+int main() {
+	unsigned x = 0x12345678;
+	int i = 2;
+	int j = 0;
+	unsigned char b = 0xAB;
+	unsigned m, n;
+	m = replace_byte(x, i, b);
+	n = replace_byte(x, j, b);
+	printf("%x\n%x", m, n);
+	return 0;
+}
