@@ -1,0 +1,8 @@
+int int_lower_one_mask(int n) {
+    int mask;
+    if (n >= 32) //左移位数大于等于整数位数的行为是未定义的
+        mask = -1;//将所有位设置为1
+    else
+        mask = (1 << n) - 1;//得到将最低地n位都设置为1，其余位都为0的掩码
+    return mask;
+}
